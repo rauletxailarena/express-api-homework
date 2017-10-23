@@ -32,11 +32,25 @@ router.put("/:id", function(req, res){
   res.json(films);
 })
 
-// delete
+// DELETE
 router.delete("/:id", function(req, res){
   var indexToDelete = req.params.id;
   films.splice(indexToDelete, 1);
   res.json(films);
+})
+
+// SHOW ALL REVIEWS
+router.get("/:id/reviews", function(req, res) {
+  var index = req.params.id;
+  res.json(films[index].reviews)
+})
+
+// CREATE A NEW REVIEW
+router.post("/:id/reviews", function(req, res){
+  var filmToReviewIndex = req.params.id;
+  var reviewToAdd = req.body.newReview;
+  films[filmToReviewIndex].reviews.push(reviewToAdd);
+  res.json(films[filmToReviewIndex].reviews);
 })
 
 module.exports = router;
